@@ -2,6 +2,7 @@ import { useState } from "react";
 import MainComponetForWidth from "../MainComponetForWidth";
 
 export const OImagesData = ["/images/1.png", "/images/2.png", "/images/3.png"];
+
 function rotateImages(index: number) {
   const rotatedImages = [
     ...OImagesData.slice(index),
@@ -62,14 +63,14 @@ function Section02() {
       <div className="flex items-center">
         {ImagesData.images.map((_, i) => {
           return (
-            <img
+            <div
               onClick={() =>
                 setImagesData({ images: rotateImages(i), imgNo: i })
               }
               key={i}
-              src={i === ImagesData.imgNo ? "/svg/1.svg" : "/svg/2.svg"}
-              className={i === ImagesData.imgNo ? "" : "p-[11px]"}
-            />
+            >
+              <img src={i === ImagesData.imgNo ? "/svg/1.svg" : "/svg/2.svg"} />
+            </div>
           );
         })}
       </div>

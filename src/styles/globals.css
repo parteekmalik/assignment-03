@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input::placeholder {
+  font-size: 16px; /* Adjust the size as needed */
+}
+.placleholderSize::placeholder {
+  font-size: ".875rem";
+  
+}

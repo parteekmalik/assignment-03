@@ -1,9 +1,20 @@
 import { useState } from "react";
-import MainComponetForWidth, { PageWidthMain } from "../MainComponetForWidth";
+import MainComponetForWidth from "../MainComponetForWidth";
 
-export const ImagesData = ["/images/1.png", "/images/2.png", "/images/3.png"];
+export const OImagesData = ["/images/1.png", "/images/2.png", "/images/3.png"];
+function rotateImages(index: number) {
+  const rotatedImages = [
+    ...OImagesData.slice(index),
+    ...OImagesData.slice(0, index),
+  ];
+  return rotatedImages;
+}
 function Section02() {
-  const [imgNo, setimgNo] = useState(1);
+  const [ImagesData, setImagesData] = useState({
+    images: rotateImages(0),
+    imgNo: 0,
+  });
+
   return (
     <MainComponetForWidth className="flex flex-col gap-10 py-20">
       <div className="flex flex-col gap-10">
@@ -23,7 +34,7 @@ function Section02() {
         </div>
       </div>
       <div className="flex justify-between    ">
-        {ImagesData.map((url) => {
+        {ImagesData.images.map((url) => {
           return (
             <div className="group relative" key={url}>
               <img src={url} />
@@ -49,12 +60,15 @@ function Section02() {
         })}
       </div>
       <div className="flex items-center">
-        {ImagesData.map((_, i) => {
+        {ImagesData.images.map((_, i) => {
           return (
             <img
+              onClick={() =>
+                setImagesData({ images: rotateImages(i), imgNo: i })
+              }
               key={i}
-              src={i + 1 === imgNo ? "/svg/1.svg" : "/svg/2.svg"}
-              className={i + 1 === imgNo ? "" : "p-[11px]"}
+              src={i === ImagesData.imgNo ? "/svg/1.svg" : "/svg/2.svg"}
+              className={i === ImagesData.imgNo ? "" : "p-[11px]"}
             />
           );
         })}
